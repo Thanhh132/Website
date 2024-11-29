@@ -1,0 +1,36 @@
+#captchaContainer {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: inline-block;
+    text-transform: uppercase; /* Chuyển đổi các ký tự thành chữ hoa */
+    color: transparent; /* Ẩn màu văn bản */
+}
+
+#captchaContainer::before {
+    content: attr(data-captcha); /* Sử dụng dữ liệu trong thuộc tính data-captcha */
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: #000; /* Màu văn bản */
+    background-image: linear-gradient(to right, #fff, #ddd, #ccc); /* Gradient màu nền */
+    -webkit-background-clip: text; /* Áp dụng gradient màu nền cho văn bản */
+    -webkit-text-fill-color: transparent; /* Ẩn màu văn bản */
+    -webkit-animation: captchaAnimation 2s infinite alternate; /* Tạo hiệu ứng chuyển động */
+    animation: captchaAnimation 2s infinite alternate; /* Tạo hiệu ứng chuyển động */
+}
+
+@keyframes captchaAnimation {
+    from {
+        transform: rotate(-10deg) scale(0.8); /* Hiệu ứng xoay và thu nhỏ */
+    }
+    to {
+        transform: rotate(10deg) scale(1.2); /* Hiệu ứng xoay và phóng to */
+    }
+}

@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Import";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="container-fluid">
+    <!-- end row style="overflow-y: auto; max-height: 600px;" -->
+    <div class="row">
+        <div class="col-12">
+            <h5 class="font-14">@ViewBag.Title</h5>
+            <table id="responsive-datatable" class="table table-bordered table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Giá KM</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{var stt = 1;}
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@stt</td>
+                            <td>@item.Name</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price</td>
+                            <td>@item.PriceSale</td>
+
+                            <td>
+                                <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Chỉnh sửa">
+                                    <a href="@Url.Action("ImportBill", "WareHouse", new { id = item.ID })" class="text-white"><i class="fa fa-print"></i></a>
+                                </button>
+                            </td>
+                        </tr>
+                        stt++;
+                    }
+                </tbody>
+
+            </table>
+
+            <!-- end -->
+
+        </div>
+    </div>
+    <!-- end row -->
+
+</div>
+<input type="file" id="fileInput" style="display: none;" />
+

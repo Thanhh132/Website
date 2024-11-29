@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập quyền quản trị</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Public/admin/img/KMTT.png">
+    <link href="~/Public/admins/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Public/admins/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="~/Public/admins/style.css" rel="stylesheet" />
+    <link href="~/Public/admins/css/animate.css" rel="stylesheet">
+    <link href="~/Public/admins/status/css/style.css" rel="stylesheet" />
+    <link href="~/Public/admins/status/css/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/Public/admins/status/css/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-recaptcha/3.0.2/angular-recaptcha.min.js" integrity="sha512-lPolLZ6HOUHdI2WF8mhGK6amwVyZKx+PQPU/cQDFy2+fooAT8P8T0oqByxKkMqczI1cV0RHUEGD9FHktGdp1tA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/Public/js/quangcao.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <center><img src="~/Public/admin/img/WebLogo.png" height="300px" width="300px" /></center>
+            <form class="m-t" id="loginForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="Tên truy cập">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Mật khẩu" id="passwordInput">
+                    <div id="capsLockWarning" style="display: none; color: red;">Caps Lock đang bật á nha</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary block full-width m-b" id="btn-login" disabled>Đăng nhập</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Phần tử chứa Captcha -->
+    <div style="text-align: center; display: none;" id="captchaSection">
+        <div id="captchaText" style="font-family: Impact, Charcoal, sans-serif; font-size: 30px; font-weight: bold; background-color: #ddd; padding: 10px; margin-bottom: 10px; color: #ddd; text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); text-decoration: line-through;oncopy="return false;" unselectable="on" onselectstart="return false;"></div>
+        <input type="text" id="captchaInput" class="form-control" placeholder="Nhập Captcha" style="margin-bottom: 10px;">
+        <button class="btn btn-primary block full-width m-b" onclick="verifyCaptcha()">Xác nhận</button>
+        <div id="captchaStatus" style="color: red; margin-top: 10px;"></div>
+    </div>
+
+    <p class="m-t text-center"> <small>Copyright Administrators &copy; 2024</small> </p>
+
+    <!-- Mainly scripts -->
+    <script src="~/Public/admins/js/jquery-3.1.1.min.js"></script>
+    <script src="~/Public/admins/js/popper.min.js"></script>
+    <script src="~/Public/admins/js/bootstrap.js"></script>
+    <script src="~/Public/admin/status/js/karma.laclac.min.js"></script>
+    <script src="~/Public/admin/status/js/sweetalert2.min.js"></script>
+    <script src="~/Public/admin/status/js/toastr.min.js"></script>
+    <script>
+
+
+        // Sự kiện kiểm tra Caps Lock
+        document.getElementById('passwordInput').addEventListener('keyup', function (event) {
+            var capsLockOn = event.getModifierState && event.getModifierState("CapsLock");
+            var capsLockWarning = document.getElementById('capsLockWarning');
+            capsLockWarning.style.display = capsLockOn ? "block" : "none";
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const usernameInput = document.querySelector('input[name="username"]');
+            const passwordInput = document.querySelector('input[name="password"]');
+            const loginButton = document.getElementById('btn-login');
+
+            function checkInputs() {
+                if (usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '') {
+                    loginButton.disabled = false;
+                } else {
+                    loginButton.disabled = true;
+                }
+            }
+
+            usernameInput.addEventListener('input', checkInputs);
+            passwordInput.addEventListener('input', checkInputs);
+        });
+    </script>
+</body>
+
+</html>

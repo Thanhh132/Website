@@ -1,0 +1,67 @@
+﻿@model ElectroShop.Models.ProductData
+@{
+    ViewBag.Title = "UpdateExcelFiles";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div>@ViewBag.Message</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <!-- Các trường nhập liệu -->
+<div class="form-group">
+    <label for="value1">ID:</label>
+    <select name="newContent[0]" id="value1" class="form-control">
+        @foreach (var product in ViewBag.Products)
+        {
+            <option value="@ViewBag.Product.ID">@ViewBag.Product.ID</option>
+        }
+    </select>
+</div>
+
+    <div class="form-group">
+        <label for="value2">ID Sản phẩm:</label>
+        <select name="newContent[1]" id="value2" class="form-control">
+            @foreach (var product in ViewBag.Products)
+            {
+                <option value="@ViewBag.Product.STT">@ViewBag.Product.STT</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="value3">Tên sản phẩm:</label>
+        <select name="newContent[2]" id="value3" class="form-control">
+            @foreach (var product in ViewBag.Products)
+            {
+                <option value="@ViewBag.Product.Name" quantity="@ViewBag.Product.Quantity">@ViewBag.Product.Name</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="value4">Số lượng:</label>
+        <select name="newContent[3]" id="value4" class="form-control">
+            @foreach (var product in ViewBag.Products)
+            {
+                <option value="@ViewBag.Product.Quantity" quantity="@ViewBag.Product.Quantity">@ViewBag.Product.Quantity</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="value5">Giá:</label>
+        <select name="newContent[4]" id="value5" class="form-control">
+            @foreach (var product in ViewBag.Products)
+            {
+                <option value="@ViewBag.Product.Price">@ViewBag.Product.Price</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="value6">Ngày tạo sản phẩm:</label>
+        <input type="text" name="newContent[5]" id="value6" class="form-control" value="@DateTime.Now" readonly />
+    </div>
+
+    <!-- Nút submit -->
+    <button type="submit" class="btn btn-primary">IN NGAY</button>
+}

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ElectroShop.Models.MProduct>
+@foreach (var item in Model)
+{
+    <div class="item">
+        <div class="single-product-item">
+            <div class="product-image">
+                <a href="~/@item.Slug"><img src="~/Public/library/product/@item.Image" alt="@item.Name" /></a>
+
+                @* Kiểm tra nếu sản phẩm được cập nhật trong vòng 1 ngày *@
+                @if (item.Updated_at != null && (DateTime.Now - item.Updated_at).TotalDays < 1)
+                {
+                    <a href="#" class="new-mark-box">new</a>
+                }
+            </div>
+            <div class="product-info">
+                <div class="customar-comments-box">
+                    <div class="rating-box">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        @*<i class="fa fa-star-half-empty"></i>*@
+                    </div>
+                </div>
+                <a href="~/@item.Slug">@item.Name</a>
+                <div class="price-box">
+                    @if (item.ProPrice != null)
+                    {
+                        <span class="price">@String.Format("{0:0,0₫}", item.ProPrice)</span><br />
+                        @* Hiển thị Price bị gạch đỏ *@
+                        <span class="price" style="text-decoration: line-through; color: red;">
+                            @String.Format("{0:0,0₫}", item.Price)
+                        </span>
+                    }
+                    else if (item.Price != null) // Nếu ProPrice là null nhưng Price không null
+                    {
+                        <span class="price">@String.Format("{0:0,0₫}", item.Price)</span>
+                    }
+                    else // Nếu cả ProPrice và Price đều null
+                    {
+                        <span>Giá không có sẵn</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
