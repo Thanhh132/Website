@@ -67,15 +67,26 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                                 @*<div class="review-box">
-                                                    <span>1 Review(s)</span>
-                                                </div>*@
+                                                <span>1 Review(s)</span>
+                                            </div>*@
                                             </div>
                                             <a href="~/@item.Slug">@item.Name</a>
                                             <div class="price-box">
-                                                <span class="price">@String.Format("{0:0,0₫}", item.ProPrice)</span>
-                                                <del><span class="price" style="color:red">@String.Format("{0:0,0₫}", item.Price)</span></del>
-                                                
+                                                @if (item.ProPrice != null && item.Price != null)
+                                                {
+                                                    <span class="price">@String.Format("{0:0,0₫}", item.ProPrice)</span>
+                                                    <del><span class="price" style="color:red">@String.Format("{0:0,0₫}", item.Price)</span></del>
+                                                }
+                                                else if (item.ProPrice != null)
+                                                {
+                                                    <span class="price">@String.Format("{0:0,0₫}", item.ProPrice)</span>
+                                                }
+                                                else if (item.Price != null)
+                                                {
+                                                    <span class="price">@String.Format("{0:0,0₫}", item.Price)</span>
+                                                }
                                             </div>
+
                                         </div>
                                     </div>
                                 </li>
